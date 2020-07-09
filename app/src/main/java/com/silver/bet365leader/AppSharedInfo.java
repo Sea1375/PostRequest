@@ -33,7 +33,6 @@ public class AppSharedInfo {
     }
 
     public String getUsername(){
-
         return preferences.getString("Username", "");
     }
 }

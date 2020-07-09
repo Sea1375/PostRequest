@@ -31,9 +31,12 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -140,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sendRequestData(String username, String url, String data, Boolean isRequest) {
+
         try {
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("username", username);
@@ -148,8 +152,8 @@ public class MainActivity extends AppCompatActivity {
             jsonBody.put("isRequest", isRequest);
 
             final String requestBody = jsonBody.toString();
-
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, mApiEndpoint, new Response.Listener<String>() {
+            Log.e("Final requestBody",String.format("%s", requestBody));
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, mApiEndpoint, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     Log.i("VOLLEY", response);
@@ -195,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
     class PayloadRecorder {
         @JavascriptInterface
         public void recordPayload(String method, String url, String payload, boolean isRequest) {
-            Boolean filtered = false;
+            Boolean filtered = true;
             if ((url.indexOf("/betswebapi/addbet") > 0 && isRequest == false) ||
                     url.indexOf("betswebapi/placebet?betguid") > 0 ||
                     (url.indexOf("betslip/mybets/closebet.ashx?") > 0 && isRequest == true)) {

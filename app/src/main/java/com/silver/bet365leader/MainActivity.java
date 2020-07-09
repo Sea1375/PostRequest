@@ -58,14 +58,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setIcon(R.mipmap.ic_launcher);*/
-
-
-        // Load Endppint and Username from SharedPreferences
-
         AppSharedInfo appSharedInfo = new AppSharedInfo(this);
         mApiEndpoint = appSharedInfo.getEndpoint();
         mUserName = appSharedInfo.getUsername();
